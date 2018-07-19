@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Jan Mitoraj <jan@ifsm.eu>
+MAINTAINER Jan Mitoraj <jan@mitoraj.cz>
 ENV w_directory /home/runner
 
 # valid from Docker 1.12

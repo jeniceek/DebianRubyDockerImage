@@ -44,7 +44,8 @@ RUN apt-get install -y \
     zlib1g-dev \
     libncurses5-dev \
     libffi-dev \
-    libgdbm-dev
+    libgdbm-dev \
+    imagemagick
 RUN adduser --system runner
 RUN echo "runner ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/runner
 USER runner

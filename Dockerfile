@@ -76,12 +76,13 @@ RUN echo 'eval "$(rbenv init -)"' >> .bashrc
 # RUN rbenv install -v 2.1.5
 # RUN rbenv install -v 2.2.0
 # RUN rbenv install -v 2.2.4
-RUN rbenv install -v 2.3.1
+# RUN rbenv install -v 2.3.1
 RUN rbenv install -v 2.4.0
 RUN rbenv install -v 2.5.0
 RUN rbenv install -v 2.5.1
 RUN rbenv install -v 2.5.5
 RUN rbenv install -v 2.6.0
+RUN rbenv install -v 2.7.1
 ENV PATH ${w_directory}/.rbenv/shims:$PATH
 # ENV RBENV_VERSION 2.0.0-p648
 # RUN gem install bundler
@@ -91,8 +92,8 @@ ENV PATH ${w_directory}/.rbenv/shims:$PATH
 # RUN gem install bundler
 # ENV RBENV_VERSION 2.2.4
 # RUN gem install bundler
-ENV RBENV_VERSION 2.3.1
-RUN gem install bundler
+# ENV RBENV_VERSION 2.3.1
+# RUN gem install bundler
 ENV RBENV_VERSION 2.4.0
 RUN gem install bundler
 ENV RBENV_VERSION 2.5.0
@@ -102,5 +103,7 @@ RUN gem install bundler
 ENV RBENV_VERSION 2.5.5
 RUN gem install bundler
 ENV RBENV_VERSION 2.6.0
+RUN gem install bundler
+ENV RBENV_VERSION 2.7.1
 RUN gem install bundler
 RUN ruby --version

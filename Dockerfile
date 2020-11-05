@@ -52,9 +52,9 @@ RUN apt-get install -y \
     xfonts-base \
     xfonts-75dpi \
     pdftk
-RUN wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb -O /tmp/wkhtmltox-0.12.5.1_stretch_amd64.deb
-RUN dpkg -i /tmp/wkhtmltox-0.12.5.1_stretch_amd64.deb
-RUN rm /tmp/wkhtmltox-0.12.5.1_stretch_amd64.deb
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.stretch_amd64.deb -O /tmp/wkhtmltox.deb
+RUN dpkg -i /tmp/wkhtmltox.deb
+RUN rm /tmp/wkhtmltox.deb
 RUN adduser --system runner
 RUN echo "runner ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/runner
 USER runner

@@ -1,7 +1,8 @@
-FROM debian:stretch
+FROM debian:buster
 MAINTAINER Jan Mitoraj <jan@mitoraj.cz>
 ENV w_directory /home/runner
 ENV DEBIAN_FRONTEND noninteractive
+ARG TARGETARCH
 
 RUN apt-get update
 RUN apt-get upgrade -y
@@ -14,7 +15,7 @@ RUN apt-get install -y \
 RUN wget -qO - https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN wget -qO - https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/apt.conf.d/yarn.list
-RUN echo "deb https://deb.nodesource.com/node_11.x stretch main" > /etc/apt/apt.conf.d/nodejs.list
+RUN echo "deb https://deb.nodesource.com/node_16.x stretch main" > /etc/apt/apt.conf.d/nodejs.list
 RUN apt-get update
 RUN apt-get install -y \
     sudo \
@@ -26,7 +27,7 @@ RUN apt-get install -y \
     nodejs \
     zlib1g-dev \
     build-essential \
-    libssl1.0-dev \
+    libssl-dev \
     libreadline-dev \
     libyaml-dev \
     libsqlite3-dev \
@@ -35,7 +36,7 @@ RUN apt-get install -y \
     libcurl4-openssl-dev \
     python3-software-properties \
     libffi-dev \
-    mysql-client \
+    mariadb-client \
     postgresql-client \
     default-libmysqlclient-dev \
     libpq-dev \
@@ -52,7 +53,7 @@ RUN apt-get install -y \
     xfonts-base \
     xfonts-75dpi \
     pdftk
-RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.stretch_amd64.deb -O /tmp/wkhtmltox.deb
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_$TARGETARCH.deb -O /tmp/wkhtmltox.deb
 RUN dpkg -i /tmp/wkhtmltox.deb
 RUN rm /tmp/wkhtmltox.deb
 RUN adduser --system runner
@@ -77,12 +78,13 @@ RUN echo 'eval "$(rbenv init -)"' >> .bashrc
 # RUN rbenv install -v 2.2.0
 # RUN rbenv install -v 2.2.4
 # RUN rbenv install -v 2.3.1
-#RUN rbenv install -v 2.4.0
-#RUN rbenv install -v 2.5.0
-#RUN rbenv install -v 2.5.1
+# RUN rbenv install -v 2.4.0
+# RUN rbenv install -v 2.5.0
+# RUN rbenv install -v 2.5.1
 RUN rbenv install -v 2.5.5
 RUN rbenv install -v 2.6.0
 RUN rbenv install -v 2.7.1
+RUN rbenv install -v 3.1.0
 ENV PATH ${w_directory}/.rbenv/shims:$PATH
 # ENV RBENV_VERSION 2.0.0-p648
 # RUN gem install bundler
@@ -94,16 +96,18 @@ ENV PATH ${w_directory}/.rbenv/shims:$PATH
 # RUN gem install bundler
 # ENV RBENV_VERSION 2.3.1
 # RUN gem install bundler
-#ENV RBENV_VERSION 2.4.0
-#RUN gem install bundler
-#ENV RBENV_VERSION 2.5.0
-#RUN gem install bundler
-#ENV RBENV_VERSION 2.5.1
-#RUN gem install bundler
+# ENV RBENV_VERSION 2.4.0
+# RUN gem install bundler
+# ENV RBENV_VERSION 2.5.0
+# RUN gem install bundler
+# ENV RBENV_VERSION 2.5.1
+# RUN gem install bundler
 ENV RBENV_VERSION 2.5.5
 RUN gem install bundler
 ENV RBENV_VERSION 2.6.0
 RUN gem install bundler
 ENV RBENV_VERSION 2.7.1
+RUN gem install bundler
+ENV EBENV_VERSION 3.1.0
 RUN gem install bundler
 RUN ruby --version
